@@ -24,4 +24,17 @@ class LoginViewTest {
 
         welcomeText.assertIsDisplayed()
     }
+
+    @Test
+    fun shouldDisplayUsernameTextField() {
+        composeTestRule.setContent {
+            LoginTheme {
+                LoginView()
+            }
+        }
+
+        val usernameTextField =composeTestRule.onNodeWithText("Username")
+
+        usernameTextField.assertIsDisplayed()
+    }
 }
