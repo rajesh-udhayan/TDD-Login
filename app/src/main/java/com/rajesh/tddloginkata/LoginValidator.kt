@@ -19,16 +19,13 @@ class LoginValidator {
         if (!username.equals(validUsername, ignoreCase = true) && !password.equals(validPassword)) {
             return "Invalid Credentials!"
         }
-        if (!username.equals(validUsername, ignoreCase = true) && password.equals(validPassword)) {
+        if (!username.equals(validUsername, ignoreCase = true)) {
             return "Invalid Username!"
         }
-        if (username.equals(validUsername, ignoreCase = true) && !password.equals(validPassword)) {
+        if (!password.equals(validPassword)) {
             return "Invalid Password!"
         }
-        if (username.equals(validUsername, ignoreCase = true) && password.equals(validPassword)) {
-            return "Login Success!"
-        }
-        return ""
+        return "Login Success!"
     }
 
 }
