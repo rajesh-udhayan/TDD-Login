@@ -12,14 +12,16 @@ class LoginViewTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @Test
-    fun shouldDisplayWelcomeText() {
+    @Before
+    fun setUp(){
         composeTestRule.setContent {
             LoginTheme {
                 LoginView()
             }
         }
-
+    }
+    @Test
+    fun shouldDisplayWelcomeText() {
         val welcomeText =composeTestRule.onNodeWithText("Welcome")
 
         welcomeText.assertIsDisplayed()
@@ -27,12 +29,6 @@ class LoginViewTest {
 
     @Test
     fun shouldDisplayUsernameTextField() {
-        composeTestRule.setContent {
-            LoginTheme {
-                LoginView()
-            }
-        }
-
         val usernameTextField =composeTestRule.onNodeWithText("Username")
 
         usernameTextField.assertIsDisplayed()
