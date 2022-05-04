@@ -3,6 +3,7 @@ package com.rajesh.tddloginkata
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -11,11 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.launch
 
 class LoginActivity : ComponentActivity() {
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels {
+        LoginViewModel.LoginViewModelFactory(LoginValidator())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setContent {
             LoginTheme {
                 Surface(color = MaterialTheme.colors.background) {

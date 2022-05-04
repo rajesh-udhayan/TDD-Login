@@ -15,7 +15,7 @@ class LoginViewTest {
     fun setUp() {
         composeTestRule.setContent {
             LoginTheme {
-                LoginView(LoginViewModel())
+                LoginView(LoginViewModel(LoginValidator()))
             }
         }
     }
