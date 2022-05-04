@@ -6,6 +6,9 @@ class LoginValidator {
         if (username.isEmpty() && !password.isEmpty()){
             return "Empty Username!"
         }
+        if (!username.isEmpty() && password.isEmpty()) {
+            return "Empty Password!"
+        }
         return "Empty Credentials!"
     }
 

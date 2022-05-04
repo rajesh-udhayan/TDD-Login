@@ -25,6 +25,12 @@ class LoginValidatorTest {
         val message = validator.validateCredentials("", "123")
 
         assertThat(message).isEqualTo("Empty Username!")
+    }
 
+    @Test
+    fun `should return empty password when password is empty but username is not empty`() {
+        val message = validator.validateCredentials("John", "")
+
+        assertThat(message).isEqualTo("Empty Password!")
     }
 }
