@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.TextFieldValue
+import kotlinx.coroutines.launch
 
 class LoginActivity : ComponentActivity() {
 
@@ -40,9 +41,18 @@ fun LoginView() {
         },
             label = { Text(text = "Password") })
 
-        Button(onClick = { }) {
+        val scope = rememberCoroutineScope()
+        val snackbarHostState = remember { SnackbarHostState() }
+
+        Button(onClick = {
+            val message = "Empty Credentials!"
+            scope.launch {
+                snackbarHostState.showSnackbar(message, duration = SnackbarDuration.Short)
+            }
+        }) {
             Text(text = "Login")
         }
+        SnackbarHost(hostState = snackbarHostState)
     }
 }
 

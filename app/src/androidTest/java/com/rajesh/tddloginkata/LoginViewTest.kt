@@ -1,10 +1,7 @@
 package com.rajesh.tddloginkata
 
-import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performTextInput
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -46,6 +43,16 @@ class LoginViewTest {
 
         assert(usernameTextField.currentText().equals("john"))
         assert(passwordTextField.currentText().equals("1234"))
+    }
+
+    @Test
+    fun shouldShowEmptyCredentialsWhenUsernameAndPasswordAreEmpty() {
+        val emptyCredentialsMsg = "Empty Credentials!"
+
+        val loginButton = composeTestRule.onNodeWithText("Login")
+        loginButton.performClick()
+
+        composeTestRule.onNodeWithText(emptyCredentialsMsg).assertIsDisplayed()
     }
 
     private fun SemanticsNodeInteraction.currentText(): String? {
