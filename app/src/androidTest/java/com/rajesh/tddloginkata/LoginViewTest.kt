@@ -15,7 +15,7 @@ class LoginViewTest {
     fun setUp() {
         composeTestRule.setContent {
             LoginTheme {
-                LoginView()
+                LoginView(LoginViewModel())
             }
         }
     }
@@ -53,6 +53,21 @@ class LoginViewTest {
         loginButton.performClick()
 
         composeTestRule.onNodeWithText(emptyCredentialsMsg).assertIsDisplayed()
+    }
+
+    @Test
+    fun shouldShowLoginSuccessWhenUsernameAndPasswordAreValid() {
+        val loginSuccessMsg = "Login Success!"
+
+        val usernameTextField = composeTestRule.onNodeWithText("Username")
+        val passwordTextField = composeTestRule.onNodeWithText("Password")
+        val loginButton = composeTestRule.onNodeWithText("Login")
+
+        usernameTextField.performTextInput("john")
+        passwordTextField.performTextInput("1234")
+        loginButton.performClick()
+
+        composeTestRule.onNodeWithText(loginSuccessMsg).assertIsDisplayed()
     }
 
     private fun SemanticsNodeInteraction.currentText(): String? {

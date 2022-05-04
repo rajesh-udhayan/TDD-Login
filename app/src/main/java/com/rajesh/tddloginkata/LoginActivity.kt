@@ -7,16 +7,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.launch
 
 class LoginActivity : ComponentActivity() {
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setContent {
             LoginTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    LoginView()
+                    LoginView(viewModel)
                 }
             }
         }
@@ -24,7 +27,7 @@ class LoginActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginView() {
+fun LoginView(viewModel: LoginViewModel) {
     Column {
         Text(text = "Welcome")
 
@@ -45,7 +48,7 @@ fun LoginView() {
         val snackbarHostState = remember { SnackbarHostState() }
 
         Button(onClick = {
-            val message = "Empty Credentials!"
+            val message = viewModel.login(username.text, password.text)
             scope.launch {
                 snackbarHostState.showSnackbar(message, duration = SnackbarDuration.Short)
             }
