@@ -40,4 +40,11 @@ class LoginViewTest {
 
         passwordTextField.assertIsDisplayed()
     }
+
+    @Test
+    fun shouldDisplayLoginButton() {
+        val loginButton =composeTestRule.onNodeWithText("Login")
+
+        loginButton.assertIsDisplayed()
+    }
 }

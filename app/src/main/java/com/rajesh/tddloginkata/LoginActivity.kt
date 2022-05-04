@@ -33,6 +33,10 @@ fun LoginView() {
 
     },
         label = { Text(text = "Password")})
+
+    Button(onClick = { }) {
+        Text(text = "Login")
+    }
 }
 
 @Composable
