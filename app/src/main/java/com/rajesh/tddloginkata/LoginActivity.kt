@@ -23,10 +23,16 @@ class LoginActivity : ComponentActivity() {
 @Composable
 fun LoginView() {
     Text(text = "Welcome")
+
     OutlinedTextField(value = "", onValueChange = {
 
     },
     label = { Text(text = "Username")})
+
+    OutlinedTextField(value = "", onValueChange = {
+
+    },
+        label = { Text(text = "Password")})
 }
 
 @Composable
