@@ -3,8 +3,10 @@ package com.rajesh.tddloginkata
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.text.input.TextFieldValue
 
 class LoginActivity : ComponentActivity() {
 
@@ -22,20 +24,25 @@ class LoginActivity : ComponentActivity() {
 
 @Composable
 fun LoginView() {
-    Text(text = "Welcome")
+    Column {
+        Text(text = "Welcome")
 
-    OutlinedTextField(value = "", onValueChange = {
+        var username by remember { mutableStateOf(TextFieldValue("")) }
+        var password by remember { mutableStateOf(TextFieldValue("")) }
 
-    },
-    label = { Text(text = "Username")})
+        OutlinedTextField(value = username, onValueChange = {
+            username = it
+        },
+            label = { Text(text = "Username") })
 
-    OutlinedTextField(value = "", onValueChange = {
+        OutlinedTextField(value = password, onValueChange = {
+            password = it
+        },
+            label = { Text(text = "Password") })
 
-    },
-        label = { Text(text = "Password")})
-
-    Button(onClick = { }) {
-        Text(text = "Login")
+        Button(onClick = { }) {
+            Text(text = "Login")
+        }
     }
 }
 
