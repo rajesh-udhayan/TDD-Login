@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.launch
 
@@ -30,31 +33,52 @@ class LoginActivity : ComponentActivity() {
 
 @Composable
 fun LoginView(viewModel: LoginViewModel) {
-    Column {
-        Text(text = "Welcome")
+    var username by remember { mutableStateOf(TextFieldValue("")) }
+    var password by remember { mutableStateOf(TextFieldValue("")) }
 
-        var username by remember { mutableStateOf(TextFieldValue("")) }
-        var password by remember { mutableStateOf(TextFieldValue("")) }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Welcome",
+            style = Typography().h3,
+            modifier = Modifier.padding(20.dp)
+        )
 
-        OutlinedTextField(value = username, onValueChange = {
-            username = it
-        },
-            label = { Text(text = "Username") })
+        OutlinedTextField(
+            value = username,
+            onValueChange = {
+                username = it
+            },
+            label = { Text(text = "Username") },
+            modifier = Modifier.padding(10.dp)
+        )
 
-        OutlinedTextField(value = password, onValueChange = {
-            password = it
-        },
-            label = { Text(text = "Password") })
+
+        OutlinedTextField(
+            value = password, onValueChange = {
+                password = it
+            },
+            label = { Text(text = "Password") },
+            modifier = Modifier.padding(5.dp)
+        )
 
         val scope = rememberCoroutineScope()
         val snackbarHostState = remember { SnackbarHostState() }
+
 
         Button(onClick = {
             val message = viewModel.login(username.text, password.text)
             scope.launch {
                 snackbarHostState.showSnackbar(message, duration = SnackbarDuration.Short)
             }
-        }) {
+        },
+        modifier = Modifier.padding(10.dp)) {
             Text(text = "Login")
         }
         SnackbarHost(hostState = snackbarHostState)
