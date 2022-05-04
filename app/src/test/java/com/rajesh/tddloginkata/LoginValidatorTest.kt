@@ -55,5 +55,10 @@ class LoginValidatorTest {
         assertThat(message).isEqualTo("Invalid Password!")
     }
 
+    @Test
+    fun `should return success when username and password are valid`() {
+        val message = validator.validateCredentials("John", "1234")
 
+        assertThat(message).isEqualTo("Login Success!")
+    }
 }
