@@ -22,52 +22,60 @@ class LoginViewTest {
 
     @Test
     fun shouldDisplayLoginViews() {
-        val welcomeText = composeTestRule.onNodeWithText("Welcome")
-        val usernameTextField = composeTestRule.onNodeWithText("Username")
-        val passwordTextField = composeTestRule.onNodeWithText("Password")
-        val loginButton = composeTestRule.onNodeWithText("Login")
+        with(composeTestRule) {
+            val welcomeText = onNodeWithText("Welcome")
+            val usernameTextField = onNodeWithText("Username")
+            val passwordTextField = onNodeWithText("Password")
+            val loginButton = onNodeWithText("Login")
 
-        welcomeText.assertIsDisplayed()
-        usernameTextField.assertIsDisplayed()
-        passwordTextField.assertIsDisplayed()
-        loginButton.assertIsDisplayed()
+            welcomeText.assertIsDisplayed()
+            usernameTextField.assertIsDisplayed()
+            passwordTextField.assertIsDisplayed()
+            loginButton.assertIsDisplayed()
+        }
     }
 
     @Test
     fun credentialsAreAddingCorrectly() {
-        val usernameTextField = composeTestRule.onNodeWithText("Username")
-        val passwordTextField = composeTestRule.onNodeWithText("Password")
+        with(composeTestRule) {
+            val usernameTextField = onNodeWithText("Username")
+            val passwordTextField = onNodeWithText("Password")
 
-        usernameTextField.performTextInput("john")
-        passwordTextField.performTextInput("1234")
+            usernameTextField.performTextInput("john")
+            passwordTextField.performTextInput("1234")
 
-        assert(usernameTextField.currentText().equals("john"))
-        assert(passwordTextField.currentText().equals("1234"))
+            assert(usernameTextField.currentText().equals("john"))
+            assert(passwordTextField.currentText().equals("1234"))
+        }
     }
 
     @Test
     fun shouldShowEmptyCredentialsWhenUsernameAndPasswordAreEmpty() {
         val emptyCredentialsMsg = "Empty Credentials!"
 
-        val loginButton = composeTestRule.onNodeWithText("Login")
-        loginButton.performClick()
+        with(composeTestRule) {
+            val loginButton = onNodeWithText("Login")
+            loginButton.performClick()
 
-        composeTestRule.onNodeWithText(emptyCredentialsMsg).assertIsDisplayed()
+            onNodeWithText(emptyCredentialsMsg).assertIsDisplayed()
+        }
     }
 
     @Test
     fun shouldShowLoginSuccessWhenUsernameAndPasswordAreValid() {
         val loginSuccessMsg = "Login Success!"
 
-        val usernameTextField = composeTestRule.onNodeWithText("Username")
-        val passwordTextField = composeTestRule.onNodeWithText("Password")
-        val loginButton = composeTestRule.onNodeWithText("Login")
+        with(composeTestRule) {
+            val usernameTextField = onNodeWithText("Username")
+            val passwordTextField = onNodeWithText("Password")
+            val loginButton = onNodeWithText("Login")
 
-        usernameTextField.performTextInput("john")
-        passwordTextField.performTextInput("1234")
-        loginButton.performClick()
+            usernameTextField.performTextInput("john")
+            passwordTextField.performTextInput("1234")
+            loginButton.performClick()
 
-        composeTestRule.onNodeWithText(loginSuccessMsg).assertIsDisplayed()
+            onNodeWithText(loginSuccessMsg).assertIsDisplayed()
+        }
     }
 
     private fun SemanticsNodeInteraction.currentText(): String? {
