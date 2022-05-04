@@ -16,6 +16,9 @@ class LoginValidator {
         if (!username.equals("John", ignoreCase = true) && !password.equals("1234")) {
             return "Invalid Credentials!"
         }
+        if (!username.equals("John", ignoreCase = true) && password.equals("1234")) {
+            return "Invalid Username!"
+        }
         return ""
     }
 

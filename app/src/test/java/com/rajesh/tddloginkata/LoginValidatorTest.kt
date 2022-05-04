@@ -40,4 +40,11 @@ class LoginValidatorTest {
 
         assertThat(message).isEqualTo("Invalid Credentials!")
     }
+
+    @Test
+    fun `should return invalid username when username is invalid but password is valid`() {
+        val message = validator.validateCredentials("Jon", "1234")
+
+        assertThat(message).isEqualTo("Invalid Username!")
+    }
 }
