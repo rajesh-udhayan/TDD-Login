@@ -13,38 +13,24 @@ class LoginViewTest {
     val composeTestRule = createComposeRule()
 
     @Before
-    fun setUp(){
+    fun setUp() {
         composeTestRule.setContent {
             LoginTheme {
                 LoginView()
             }
         }
     }
+
     @Test
-    fun shouldDisplayWelcomeText() {
-        val welcomeText =composeTestRule.onNodeWithText("Welcome")
+    fun shouldDisplayLoginViews() {
+        val welcomeText = composeTestRule.onNodeWithText("Welcome")
+        val usernameTextField = composeTestRule.onNodeWithText("Username")
+        val passwordTextField = composeTestRule.onNodeWithText("Password")
+        val loginButton = composeTestRule.onNodeWithText("Login")
 
         welcomeText.assertIsDisplayed()
-    }
-
-    @Test
-    fun shouldDisplayUsernameTextField() {
-        val usernameTextField =composeTestRule.onNodeWithText("Username")
-
         usernameTextField.assertIsDisplayed()
-    }
-
-    @Test
-    fun shouldDisplayPasswordTextField() {
-        val passwordTextField =composeTestRule.onNodeWithText("Password")
-
         passwordTextField.assertIsDisplayed()
-    }
-
-    @Test
-    fun shouldDisplayLoginButton() {
-        val loginButton =composeTestRule.onNodeWithText("Login")
-
         loginButton.assertIsDisplayed()
     }
 }
