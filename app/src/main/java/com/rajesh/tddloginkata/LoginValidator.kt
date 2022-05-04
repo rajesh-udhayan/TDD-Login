@@ -4,6 +4,9 @@ class LoginValidator {
 
 
     fun validateCredentials(username: String, password: String): String {
+        val validUsername = "John"
+        val validPassword = "1234"
+
         if (username.isEmpty() && password.isEmpty()) {
             return "Empty Credentials!"
         }
@@ -13,10 +16,10 @@ class LoginValidator {
         if (password.isEmpty()) {
             return "Empty Password!"
         }
-        if (!username.equals("John", ignoreCase = true) && !password.equals("1234")) {
+        if (!username.equals(validUsername, ignoreCase = true) && !password.equals(validPassword)) {
             return "Invalid Credentials!"
         }
-        if (!username.equals("John", ignoreCase = true) && password.equals("1234")) {
+        if (!username.equals(validUsername, ignoreCase = true) && password.equals(validPassword)) {
             return "Invalid Username!"
         }
         return ""
